@@ -1,0 +1,294 @@
+<?php
+if (!isset($_SESSION["logged_is_user"])) {
+    header("Location: http://comedor.undac.edu.pe/");
+    exit();
+} elseif ($_SESSION["role"] !== "AD" and $_SESSION["role"] !== "SP") {
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        header("Location:" . $_SERVER['HTTP_REFERER']);
+    } else {
+        header("Location: http://comedor.undac.edu.pe/");
+    }
+    exit();
+}
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+  <?php include "../templates/layouts/head1.php";?>
+<body class="app sidebar-mini rtl sidenav-toggled">
+  <?php include "../templates/layouts/header.php";?>
+  <?php include "../templates/layouts/menu.php";?>
+
+  <main class="app-content">
+    <div class="container" style="margin-top: 20px;">
+      <?php if ($_SESSION["role"] === "SP") {?>
+      <div id="menu-botones" class="icon-angle-up" style="display: block;">
+        <div class="container">
+          <div class="row col-md-7 offset-md-5">
+            <button class="closeMenu btn btn-info" type="button" id="cerrarMenu" name="cerrarMenu"><i class="fas fa-close"></i> Cerrar Menu del Dia</button>
+          </div>
+        </div>
+      </div>
+      <?php }?>
+      <section class="sectionTitulo">
+        <form name="forma_asistencia" id="form_asistencia" method="POST">
+          <input type="hidden" name="id_menu"  id="id_menu" value="">
+          <div class="row">
+            <div class="input-group input-group-sm mb-4 col-md-6 col-12">
+                      <div class="input-group-prepend" style="height: 30px;">
+                        <span class="input-group-text"><b>Tipo de Menu : </b></span>
+                      </div>
+                      <select class="form-control" value="" id="select_type_menu" name="select_type_menu" onblur="revisar(this)" onchange="revisar(this)" >
+                        <option selected disabled="true" value="">-- Seleccione Menú --</option>
+                        <option value="1">Desayuno</option>
+                        <option value="2">Almuerzo</option>
+                        <option value="3">Cena</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Debes seleccionar el campo Tipo de Menu
+                      </div>
+              </div>
+
+              <div class="input-group input-group-sm mb-4 col-md-6 col-12">
+                      <div class="input-group-prepend" style="height: 30px;">
+                        <span class="input-group-text"><b>Horario : </b></span>
+                      </div>
+                      <select class="form-control" id="select_horario" name="select_horario" onblur="revisar(this)" onchange="revisar(this)">
+                        <option value="" disabled="true" selected="true">-- Seleccione Horario --</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Debes seleccionar el campo Horario
+                      </div>
+              </div>
+
+
+          </div>
+
+          <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><b>Codigo o DNI : </b></span>
+                      </div>
+                      <input type="text" class="form-control" id="cod_dni_alumno" name="cod_dni_alumno" placeholder="Código de Matrícula / DNI" aria-label="" aria-describedby="" onblur="revisar(this)" onkeyup="revisar(this)">
+                      <div class="input-group-append">
+                        <button class="btn btn-info" id="botonAsistencia" type="submit"><i class="fas fa-search"></i></button>
+                      </div>
+                      <div class="invalid-feedback">
+                        Debes seleccionar el campo Horario
+                      </div>
+              </div>
+        </form>
+      </section>
+      <header id="header_cuerpo_asis_infor" class="headerInformacion">
+
+          <div id="mostrar_loading" style="display: none;">
+            <?php include "../templates/layouts/loading.html";?>
+          </div>
+
+          <div id="mostrar_info" style="display: block">
+            <div class="row">
+              <div class="col-7 col-md-8 col-lg-10 align-items-center justify-content-center pb-3">
+                 <h3 class="text-center">DATOS DE ASISTENCIA</h3>
+              </div>
+              <div class="col-5 col-md-4 col-lg-2 align-items-center justify-content-center pb-3">
+                 <label class="registry1 text-center" id="titleR">REGISTROS:</label><br>
+                 <label class="registry text-center" id="asistencia">_ _ _</label><label class="registry text-center">&nbspde&nbsp</label><label class="registry text-center" id="total">_ _ _</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-10">
+                <div class="row">
+                  <div class="col-4 item">
+                    <label for="">Código de Matrícula :</label>
+                  </div>
+                  <div class="col-8 campo">
+                    <label for="" id="label_codigo_asis" name="label_codigo_asis">_ _ _ _ _ _ _ _ _ _</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4 item">
+                    <label  for="">DNI :</label>
+                  </div>
+                  <div class="col-8 campo">
+                    <label for="" id="label_dni_asis" name="label_dni_asis">_ _ _ _ _ _ _ _</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4 item">
+                    <label for="">Apellidos y Nombres :</label>
+                  </div>
+                  <div class="col-8 campo">
+                    <label for="" id="label_apell_nom_asis" name="label_apell_nom_asis">_ _ _ _ _ _ _ _ _ _ _,&nbsp_ _ _ _ _ _ _ _ </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4 item">
+                    <label for="">Fecha de Reservación :</label>
+                  </div>
+                  <div class="col-8 campo">
+                    <label for="" id="label_hora_reserva_asis" name="label_hora_reserva_asis">_ _/_ _/_ _ _ _ &nbsp _ _:_ _</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-2 align-self-center turno" id="turno">
+                <label for="" class="letra">Turno</label> <br>
+                <label id="label_turno_asis" name="label_turno_asis" for="" class="numero"><p>_ _ _ _ _   _ _ _ _</p></label>
+              </div>
+            </div>
+            <div class="row mensaje" id="mensaje">
+              <div id="div_mensaje_asis"  name="div_mensaje_asis" class="col-12">
+                _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ ...!
+              </div>
+            </div>
+          </div>
+      </header>
+    </div>
+    <!--modal restablecer contraseña-->
+    <div id="menuClose" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Cerrar Menú del Día</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal needs-validation" id="formCerrarMenu" name="formCerrarMenu" novalidate>
+
+              <div class="input-group input-group-sm mb-2">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" style="width: 170px;"><b>Fecha : </b></span>
+                </div>
+                <input type="date" class="form-control"  onblur="validarFormatoFecha(this);" onkeyup="validarFormatoFecha(this);" name="fechaCerrarmenu" id="fechaCerrarmenu" required="">
+                <div class="invalid-feedback" style="margin-left: 170px;">
+                  Ingrese una Fecha
+                </div>
+              </div>
+              <div class="input-group input-group-sm mb-2">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" style="width: 170px;"><b>Tipo de Menu : </b></span>
+                </div>
+                <select class="form-control" id="typeCerrarMenu" name="typeCerrarMenu" onblur="revisar(this)" onchange="revisar(this)" >
+                  <option selected disabled="true" value="">-- Seleccione Menú --</option>
+                  <option value="1">Desayuno</option>
+                  <option value="2">Almuerzo</option>
+                  <option value="3">Cena</option>
+                </select>
+                <div class="invalid-feedback" style="margin-left: 170px;">
+                  Selecciona Tipo de Menu
+                </div>
+              </div>
+              <div class="row input-group input-group-sm mb-2">
+                <div class="input-group-prepend col-6">
+                  <span class="input-group-text" style="width: 170px;"><b>¿Asistencia Coberturado? : </b></span>
+                </div>
+                <div class="custom-control custom-radio col-3">
+                  <input type="radio" id="customRadio4" name="asistCobert" class="custom-control-input" value="si">
+                  <label class="custom-control-label" for="customRadio4"> Si</label>
+                </div>
+                <div class="custom-control custom-radio col-3">
+                  <input type="radio" id="customRadio5" name="asistCobert" class="custom-control-input " value="no">
+                  <label class="custom-control-label" for="customRadio5"> No</label>
+                </div>
+
+                <div class="invalid-feedback" style="margin-left: 115px;">
+                    El campo Fecha esta incorrecta
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" onclick="cleanModal();">Cancelar</button>
+            <button type="submit" class="btn btn-success btn-sm" id="buttonCerrarMenu" name="buttonCerrarMenu">Enviar</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    </main>
+  <?php include "../templates/layouts/scriptFinal.php";?>
+
+  <script src="js/asistencia/asistencia.js"></script>
+</body>
+
+
+</html>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $(document).on("click",".closeMenu", closeMenu);
+
+    /*$("#cerrarMenu").click(function(event) {
+
+    });*/
+
+  });
+
+  $("#formCerrarMenu").submit(function(e){
+    validarFormCerrarMenu(e);
+
+    var valid=true;
+    $("#formCerrarMenu .is-invalid").each(function(){
+      valid=false;
+    });
+
+    if (valid) {
+      closeMeenuTypeDate();
+    }
+  });
+
+  function closeMenu(){
+    $("#menuClose").modal('show');
+  }
+
+  function closeMeenuTypeDate(){
+    var data=$("#formCerrarMenu").serialize();
+    $.ajax({
+      url: 'asistencia/cerrar/menu',
+      type: 'POST',
+      data: data,
+      beforeSend: function(){
+        $('#buttonCerrarMenu').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Loading').attr('disabled', true);
+      },
+      success: function(data){
+        var json = JSON.parse(data);
+        if(json.state==0){
+          alertify.error(json.message);
+        }else if(json.state==1){
+          alertify.success(json.data+" "+json.message);
+        }
+      }
+    })
+    .done(function() {
+      //console.log("success");
+      $('#buttonCerrarMenu').html('<i class="fas fa-check"></i> Enviar').attr('disabled', false);
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+      if (jqXHR.status === 0) {
+        alertify.error('No Conectado: Verifique su conexión a Internet.');
+        $('#botonhorario').html('Guardar').attr('disabled', false);
+      }else if (jqXHR.status == 404) {
+        alertify.error('Error [404]: Página no encontrada.');
+      }else if (jqXHR.status == 500) {
+        alertify.error('Error [500]: Error Servidor Interno.');
+      }else if (textStatus === 'timeout') {
+        alertify.error('Error de tiempo de espera... :(');
+      }
+    })
+    .always(function() {
+      //console.log("complete");
+    });
+  }
+
+  function cleanModal() {
+    $("#formCerrarMenu .is-valid").each(function(){
+      //console.log($(this).checked());
+      $(this).attr('class', 'form-control');
+    });
+
+    $("#formCerrarMenu .is-invalid").each(function(){
+      $(this).attr('class', 'form-control');
+    });
+  }
+</script>

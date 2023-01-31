@@ -1,0 +1,372 @@
+#menu-botones {
+    display: none;
+    z-index: 2;
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    background-color: #444;
+    background-color: rgba(0,0,0,.1);
+    font-size: 20px;
+    line-height: 36px;
+    text-align: center;
+    color: #fff;
+    top: 50px;
+    left: 0px;
+    right: 0px;
+    bottom: auto;
+    cursor: pointer;
+    border-radius: 2px;
+    padding-top: 8px;
+}
+
+.fc-desayuno{
+	background-color: #FF5733;
+	padding: 5px;
+	position: relative;
+    display: block;
+    font-size: .85em;
+    line-height: 1.3;
+    border-radius: 3px;
+    border: 1px solid #FF5733;
+}
+
+.fc-almuerzo{
+	background-color: #4F248B;
+	padding: 5px;
+	position: relative;
+    display: block;
+    font-size: .85em;
+    line-height: 1.3;
+    border-radius: 3px;
+    border: 1px solid #4F248B;
+}
+
+.fc-cena{
+	background-color: #8B5024;
+	padding: 5px;
+	position: relative;
+    display: block;
+    font-size: .85em;
+    line-height: 1.3;
+    border-radius: 3px;
+    border: 1px solid #8B5024;
+}
+
+#botonEvento{
+  	cursor: move;
+}
+
+.app-header{
+	padding-right: 0px;
+	background-color: #264adf;
+}
+
+.app-sidebar__toggle:focus,
+.app-sidebar__toggle:hover{
+	background-color: #1a36ab;
+}
+
+.app-nav__item:hover{
+	text-decoration: none;
+}
+
+.app-sidebar{
+	background-color: #264adf;
+	padding-top: 50px; 
+}
+
+.app-menu__item.active,
+.app-menu__item:hover,
+.app-menu__item:focus{
+	background-color: #1a36ab;
+	border-left-color: #fff;
+}
+
+.dropdown-divider{
+	margin-top: 0px;
+}
+
+.app-logo{
+	margin-top: 10px;
+	margin-left: 10px;
+}
+/*modal*/
+.nav-tabs .nav-link.active {
+    font-weight:bold;
+    background-color: transparent;
+    border-bottom:3px solid #1a36ab;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    padding-top: 20px;
+    color: #264adf;
+    font-weight: bold;
+    font-family: "arial narrow";
+}
+
+.nav-tabs{
+	height: 60px;
+}
+
+a{
+	color: #000;
+	font-weight: bold;
+	font-family: "arial narrow";
+}
+
+.input-group-text{
+	width: 100px;
+	text-align: right;
+}
+
+#botones{
+	border-top: 1px solid #dee2e6; 
+	padding-top: 10px;
+	margin-left: 1px;
+	margin-right: 1px;
+	justify-content: flex-end;
+}
+
+/*estilo de asistencia*/
+.item{
+	font-size: 22px;
+	font-family: "arial narrow";
+}
+
+.campo{
+	font-family: "arial narrow";
+	font-size: 26px;
+	font-weight: bold;
+}
+
+.turno{
+	border-radius: 10px; 
+	border: 2px solid #000; 
+	text-align: center; 
+	padding: 0px;
+	font-family: "arial narrow";
+}
+
+.numero{
+	font-weight: bold;
+	font-size: 35px;
+}
+
+.letra{
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.mensaje{
+	border: 2px solid #000; 
+	border-radius: 10px; 
+	margin-top: 20px;
+	text-align: center;
+	font-size: 40px;
+	font-weight: bold;
+}
+
+.headerInformacion{
+	background-color: #fff; 
+	margin-top: 10px; 
+	padding: 40px;
+	border-radius: 10px;
+	-moz-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+  	-webkit-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+  	box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+}
+
+.sectionTitulo{
+	background-color: #fff; 
+	padding: 10px;
+	padding-top: 20px;
+	border-radius: 10px;
+	-moz-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+  	-webkit-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+  	box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+}
+
+@media screen and (max-width: 576px) {
+	.item{
+		font-size: 11px;
+		font-family: "arial narrow";
+	}
+
+	.campo{
+		font-family: "arial narrow";
+		font-size: 13px;
+		font-weight: bold;
+	}
+
+	.numero{
+		font-weight: bold;
+		font-size: 11px;
+	}
+
+	.letra{
+		font-size: 10px;
+		font-weight: bold;
+	}
+	.mensaje{
+		font-size: 15px;
+		font-weight: bold;
+	}
+	#botonEvento{
+	  	font-size: 10px;
+	}
+	#botonLeyenda{
+	  	font-size: 10px;
+	}
+}
+
+@media screen and (min-width: 576px) and (max-width: 768px) {
+	.item{
+		font-size: 13px;
+		font-family: "arial narrow";
+	}
+
+	.campo{
+		font-family: "arial narrow";
+		font-size: 15px;
+		font-weight: bold;
+	}
+
+	.numero{
+		font-weight: bold;
+		font-size: 14px;
+	}
+
+	.letra{
+		font-size: 15px;
+		font-weight: bold;
+	}
+	.mensaje{
+		font-size: 20px;
+		font-weight: bold;
+	}
+	#botonEvento{
+	  	font-size: 12px;
+	}
+	#botonLeyenda{
+	  	font-size: 12px;
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+	.item{
+		font-size: 15px;
+		font-family: "arial narrow";
+	}
+
+	.campo{
+		font-family: "arial narrow";
+		font-size: 17px;
+		font-weight: bold;
+	}
+
+	.numero{
+		font-weight: bold;
+		font-size: 17px;
+	}
+
+	.letra{
+		font-size: 25px;
+		font-weight: bold;
+	}
+	.mensaje{
+		font-size: 25px;
+		font-weight: bold;
+	}
+	#botonEvento{
+	  	font-size: 14px;
+	}
+	#botonLeyenda{
+	  	font-size: 14px;
+	}
+}
+
+@media screen and (min-width: 992px) and (max-width: 1300px) {
+	.item{
+		font-size: 17px;
+		font-family: "arial narrow";
+	}
+
+	.campo{
+		font-family: "arial narrow";
+		font-size: 19px;
+		font-weight: bold;
+	}
+
+	.numero{
+		font-weight: bold;
+		font-size: 20px;
+	}
+
+	.letra{
+		font-size: 25px;
+		font-weight: bold;
+	}
+	.mensaje{
+		font-size: 30px;
+		font-weight: bold;
+	}
+	#botonEvento{
+	  	font-size: 16px;
+	}
+	#botonLeyenda{
+	  	font-size: 16px;
+	}
+}
+
+/*codigo para alertify*/
+.alertify-notifier{
+	color: white;
+}
+
+element.style {
+    background-color: green;
+}
+
+/*leyenda reserva*/
+#leyenda-botones {
+    display: none;
+    z-index: 2;
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    background-color: #444;
+    background-color: rgba(0,0,0,.1);
+    font-size: 20px;
+    line-height: 36px;
+    text-align: center;
+    color: #fff;
+    top: 50px;
+    left: 0px;
+    right: 0px;
+    bottom: auto;
+    cursor: pointer;
+    border-radius: 2px;
+    padding-top: 8px;
+}
+
+.fc-faltas{
+	background-color: #dc3545;
+	padding: 5px;
+	position: relative;
+    display: block;
+    font-size: .85em;
+    line-height: 1.3;
+    border-radius: 3px;
+    border: 1px solid #dc3545;
+}
+
+.fc-asistencias{
+	background-color: #28a745;
+	padding: 5px;
+	position: relative;
+    display: block;
+    font-size: .85em;
+    line-height: 1.3;
+    border-radius: 3px;
+    border: 1px solid #28a745;
+}
