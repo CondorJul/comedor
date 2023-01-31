@@ -1,2 +1,0 @@
-insert into base_users(eid,oid, uid, escid,subid,pid,rid,password,register,created,state, notification,val_admission,"stateC")
-VALUES ('20154605046', '1','1591205047','1CO', '1901', '72368511','AL',md5('1591205047'), 'Soporte', now(), 'A','0', true, false);
