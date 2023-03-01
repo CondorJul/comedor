@@ -1,3 +1,4 @@
+import { SERVER_ROUTE } from "../env";
 $(document).ready(function(){
 
   //var formulario = document.getElementsByName('forma_asistencia')[0];
@@ -46,7 +47,7 @@ $(document).ready(function(){
   $(".cerrar").click(function(){
       
       $.ajax({
-          url: 'http://comedor.undac.edu.pe/close/login/user/',
+          url: `${SERVER_ROUTE}/close/login/user/`,
           method:'POST',        
           success: function(resp) {
             setTimeout(function(){
@@ -61,7 +62,7 @@ $(document).ready(function(){
 //funcioens y metodos
   function addAsistencia(){
     $.ajax({
-      url: 'http://comedor.undac.edu.pe/updateAssist/reservation',
+      url: `${SERVER_ROUTE}/updateAssist/reservation`,
       type: 'POST',
       //dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
       data: $("#form_asistencia").serialize(),
@@ -137,7 +138,7 @@ $(document).ready(function(){
 
   function loadHorario(typeMenu){
     $.ajax({
-      url: 'http://comedor.undac.edu.pe/asistencia/horary',
+      url: `${SERVER_ROUTE}/asistencia/horary`,
       type: 'GET',
       //dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
       data: {typeMenu: typeMenu},
@@ -168,7 +169,7 @@ function loadMenuToday(typeMenu){
 
 
     $.ajax({
-      url: 'http://comedor.undac.edu.pe/menu/today',
+      url: `${SERVER_ROUTE}/menu/today`,
       type: 'GET',
       //dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
       data: {typeMenu: typeMenu},

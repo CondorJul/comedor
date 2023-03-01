@@ -1,3 +1,4 @@
+import { SERVER_ROUTE } from "../env";
 $(document).ready(function(){
   var local = window.sessionStorage;
   var obj = $("#login");
@@ -15,7 +16,7 @@ $("#login").submit(function(e) {
   if(verifyForm(obj))
   {
       $.ajax({
-            url: 'http://comedor.undac.edu.pe/validate/login/user/',
+            url: `${SERVER_ROUTE}/validate/login/user/`,
             method:'POST',
             data:obj.serialize(),
             beforeSend: function(resp){       

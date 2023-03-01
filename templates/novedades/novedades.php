@@ -1,6 +1,6 @@
 <?php
 if (!isset($_SESSION["logged_is_user"])) {
-    header("Location: http://comedor.undac.edu.pe/");
+    header("Location: ".SERVER_PHP);
     exit();
 }
 ?>

@@ -1,3 +1,4 @@
+import { SERVER_ROUTE } from "../env";
 $(document).ready(function(){
 
   //var formulario = document.getElementsByName('formMenu')[0];
@@ -137,7 +138,7 @@ var eventAux=null;
   $(document).ready(function(){
     $(".cerrar").click(function(){
           $.ajax({
-              url: 'http://comedor.undac.edu.pe/close/login/user/',
+              url: `${SERVER_ROUTE}/close/login/user/`,
               method:'POST',        
               success: function(resp) {
                 setTimeout(function(){
@@ -171,7 +172,7 @@ var eventAux=null;
 
 
     $.ajax({
-      url: 'http://comedor.undac.edu.pe/menu/dato/todo/',
+      url: `${SERVER_ROUTE}/menu/dato/todo/`,
         beforeSend: function(resp){
           document.getElementById('mostrar_loadingMS').style.display = 'block';
           document.getElementById('calendarioWeb').style.display = 'none';
@@ -332,7 +333,7 @@ var eventAux=null;
     var typeMenu = $("#menuTitle").attr("data-type"); 
     var data= $("#formMenu").serialize()+'&typeMenu=' + typeMenu;
     $.ajax({
-      url: 'http://comedor.undac.edu.pe/create/menu/',
+      url: `${SERVER_ROUTE}/create/menu/`,
       type: 'POST',
       data: data,
       success: function(data){
@@ -371,7 +372,7 @@ var eventAux=null;
     var pid = $("#botones").attr("data-pid");
     var data= $("#formMenu").serialize()+'&pid=' + pid;
     $.ajax({
-      url: 'http://comedor.undac.edu.pe/update/menu/',
+      url: `${SERVER_ROUTE}/update/menu/`,
       type: 'POST',
       data: data,
       success: function(data){
@@ -409,7 +410,7 @@ var eventAux=null;
   function delMenu(){
     var pid = $("#botones").attr("data-pid");
     $.ajax({
-      url: 'http://comedor.undac.edu.pe/delete/menu/',
+      url: `${SERVER_ROUTE}/delete/menu/`,
       type: 'POST',
       data: {pid, pid},
       success: function(data){
@@ -440,7 +441,7 @@ var eventAux=null;
 
   function seleccionarMenu(event, pid){
     $.ajax({
-      url: 'http://comedor.undac.edu.pe/capturarEspecifico/menu/',
+      url: `${SERVER_ROUTE}/capturarEspecifico/menu/`,
       type: 'POST',
       data: {pid, pid},
       success: function(data){

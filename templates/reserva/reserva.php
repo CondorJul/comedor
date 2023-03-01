@@ -1,12 +1,12 @@
 <?php
 if (!isset($_SESSION["logged_is_user"])) {
-    header("Location: http://comedor.undac.edu.pe/");
+    header("Location: ".SERVER_PHP);
     exit();
 } elseif ($_SESSION["role"] !== "AL" and $_SESSION["role"] !== "SP") {
     if (isset($_SERVER['HTTP_REFERER'])) {
         header("Location:" . $_SERVER['HTTP_REFERER']);
     } else {
-        header("Location: http://comedor.undac.edu.pe/");
+        header("Location: ".SERVER_PHP);
     }
     exit();
 }

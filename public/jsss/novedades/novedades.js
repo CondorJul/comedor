@@ -1,3 +1,4 @@
+  import { SERVER_ROUTE } from "../env";
   $(document).ready(function(){    
     getNov(false);
      $("#search").keyup(searching);
@@ -13,7 +14,7 @@
     obj = $(this);
      
     $.ajax({
-          url: 'http://comedor.undac.edu.pe/novedades/update/specific/',
+          url: `${SERVER_ROUTE}/novedades/update/specific/`,
           method:'POST',
           data:{token:obj.data("modify")},
           beforeSend: function(resp){
@@ -50,7 +51,7 @@
   {
    let obj = $(this);
     $.ajax({
-          url: 'http://comedor.undac.edu.pe/novedades/delete/specific/',
+          url: `${SERVER_ROUTE}/novedades/delete/specific/`,
           method:'POST',
           data:{token:obj.data("index")},
           beforeSend: function(resp){
@@ -108,7 +109,7 @@
       }      
 
       $.ajax({
-          url: 'http://comedor.undac.edu.pe/create/novedad/',
+          url: `${SERVER_ROUTE}/create/novedad/`,
           method:'POST',
           data:data,
           beforeSend: function(resp){
@@ -156,7 +157,7 @@
 
   function changeState(){
     $.ajax({
-          url: 'http://comedor.undac.edu.pe/novedades/update/state/',
+          url: `${SERVER_ROUTE}/novedades/update/state/`,
           method:'POST',
           data:{token:$(this).data("state"),state:$(this).data("status")},
           beforeSend: function(resp){
@@ -178,7 +179,7 @@
     function searching(){
       //alertify.success($(this).val());
       $.ajax({
-          url: 'http://comedor.undac.edu.pe/novedades/search/dato/',
+          url: `${SERVER_ROUTE}/novedades/search/dato/`,
           method:'POST',
           data:{search:$(this).val()},
           beforeSend: function(resp){
@@ -209,7 +210,7 @@
 
 function getNov(flag){
 
-        let url = (flag)?'http://comedor.undac.edu.pe/novedades/dato/state/':'http://comedor.undac.edu.pe/novedades/dato/todo/';
+        let url = (flag)?`${SERVER_ROUTE}/novedades/dato/state/`:`${SERVER_ROUTE}/novedades/dato/todo/`;
 
         $.ajax({
           url: url,
@@ -269,7 +270,7 @@ function getNov(flag){
   var my_posts = $("[rel=tooltip]");
   $(".cerrar").click(function(){
       $.ajax({
-          url: 'http://comedor.undac.edu.pe/close/login/user/',
+          url: `${SERVER_ROUTE}/close/login/user/`,
           method:'POST',        
           success: function(resp) {
             setTimeout(function(){

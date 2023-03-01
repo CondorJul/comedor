@@ -2,4 +2,6 @@
 /logs/*
 !/logs/README.md
 /src/settings.php
+/src/env.php
+/public/jsss/env.js
 /db/

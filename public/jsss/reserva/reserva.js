@@ -1,9 +1,11 @@
+import { SERVER_ROUTE } from "../env";
+
   var eventAux = null;
     $(document).ready(function(){
 
       $(".cerrar").click(function(){
           $.ajax({
-              url: 'http://comedor.undac.edu.pe/close/login/user/',
+              url: `${SERVER_ROUTE}/close/login/user/`,
               method:'POST',        
               success: function(resp) {
                 setTimeout(function(){
@@ -15,7 +17,7 @@
       });
       
       $.ajax({
-        url: 'http://comedor.undac.edu.pe/menu/dato/todo/',
+        url: `${SERVER_ROUTE}/menu/dato/todo/`,
          beforeSend: function(resp){
           document.getElementById('mostrar_loadingR').style.display = 'block';
           document.getElementById('calendarioWeb').style.display = 'none';
@@ -131,7 +133,7 @@
       var fecha=$('#calendarioWeb .fc-toolbar .fc-center h2').html();
       var data = 'mes='+fecha;
       $.ajax({
-        url: 'http://comedor.undac.edu.pe/reserva/asistenciasFaltas',
+        url: `${SERVER_ROUTE}/reserva/asistenciasFaltas`,
         type: 'POST',
         data: data,
         success: function(data){
@@ -159,7 +161,7 @@
       });
     
       $.ajax({
-        url: 'http://comedor.undac.edu.pe/reserva/asistencia',
+        url: `${SERVER_ROUTE}/reserva/asistencia`,
         type:'POST',
         success: function(resp){
           var solvet = JSON.parse(resp);
@@ -214,7 +216,7 @@
     function checkMenuEnable(typeMenu, idMenu) {
       var data = 'idMenu='+idMenu;  
       $.ajax({
-        url: 'http://comedor.undac.edu.pe/menu/checkMenuEnable',
+        url: `${SERVER_ROUTE}/menu/checkMenuEnable`,
         type: 'POST',
         data: data,
         success: function(data){
@@ -255,7 +257,7 @@
       var data = 'typeMenu='+typeMenu+'&idMenu='+idMenu;
       $.ajax({
 
-        url:'http://comedor.undac.edu.pe/horario/getHoraryCantReser',
+        url:`${SERVER_ROUTE}/horario/getHoraryCantReser`,
         type: 'POST',
         data: data,
         beforeSend: function(){
@@ -280,12 +282,12 @@
               var divHoraryAux="<div class=\"col-lg-6\"> "+
                                  "<div class=\"row caja justify-content-center align-items-center\">"+
                                    "<div class=\"col-5 horas text-center\">"+
-                                     "<img src=\"http://comedor.undac.edu.pe/img/hora.png\" width=\"40\" height=\"40\"> "+
+                                     "<img src=\""+SERVER_ROUTE+"/img/hora.png\" width=\"40\" height=\"40\"> "+
                                       "<h4 class=\"h4-r\">Horarios</h4>"+
                                       "<h5 class=\"h5-r\">"+horary[i].food_start_char+" a "+horary[i].food_end_char+"</h5>"+
                                     "</div>"+
                                     "<div class=\"col-4 horas text-center cantidadReserva\">"+
-                                     "<img src=\"http://comedor.undac.edu.pe/img/grupo.png\" width=\"60\" height=\"40\">"+
+                                     "<img src=\""+SERVER_ROUTE+"/img/grupo.png\" width=\"60\" height=\"40\">"+
                                       "<h4 class=\"h4-r\">Reservado</h4>"+
                                       "<h5 class=\"h5-r\"><b class=\"contador"+i+"\">"+horary[i].cantreser+"</b> de ("+horary[i].cant+")</h5>"+
                                     "</div>"+
@@ -365,7 +367,7 @@
       var idMenu = $("#menuTitle").attr("data-idM");
       var data = 'idMenu='+idMenu+'&idHorary='+idHorary;  
       $.ajax({
-        url: 'http://comedor.undac.edu.pe/create/reservation/',
+        url: `${SERVER_ROUTE}/create/reservation/`,
         type: 'POST',
         data: data,
         success: function(data){
@@ -401,7 +403,7 @@
     function captureReservationUser(idMenu) {
       var data = 'idMenu='+idMenu;
       $.ajax({
-        url: 'http://comedor.undac.edu.pe/capture/reservation/',
+        url: `${SERVER_ROUTE}/capture/reservation/`,
         type: 'POST',
         data: data,
         success: function(data){

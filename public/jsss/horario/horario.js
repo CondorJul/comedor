@@ -1,3 +1,4 @@
+import { SERVER_ROUTE } from "../env";
 $(document).ready(function(){
 
   //var formulario = document.getElementsByName('formHorario')[0];
@@ -241,7 +242,7 @@ $(document).ready(function(){
           loadTable($("#search").val());
            $(".cerrar").click(function(){
             $.ajax({
-                url: 'http://comedor.undac.edu.pe/close/login/user/',
+                url: `${SERVER_ROUTE}/close/login/user/`,
                 method:'POST',        
                 success: function(resp) {
                   setTimeout(function(){
@@ -304,7 +305,7 @@ $(document).ready(function(){
         
         $.ajax({
 
-          url:'http://comedor.undac.edu.pe/create/horario/',
+          url:`${SERVER_ROUTE}/create/horario/`,
           type: 'POST',
           data: data,
           success: function(data){
@@ -354,7 +355,7 @@ $(document).ready(function(){
         var data= $("#formHorario").serialize()+'&pid=' + pid;
 
         $.ajax({
-           url: 'http://comedor.undac.edu.pe/update/horario/',
+           url: `${SERVER_ROUTE}/update/horario/`,
            type: 'POST',
            data: data,
            success: function(data){
@@ -393,7 +394,7 @@ $(document).ready(function(){
             var des=confirm('¿Estás seguro de querer eliminar?');
             if (des == true) {
             $.ajax({
-            url: 'http://comedor.undac.edu.pe/delete/horario/',
+            url: `${SERVER_ROUTE}/delete/horario/`,
             type: 'POST',
             data: {id, id},
             beforeSend: function(data){
@@ -435,7 +436,7 @@ $(document).ready(function(){
       function showHoraryTable(id){
         $.ajax({
 
-            url:'http://comedor.undac.edu.pe/obtener/horario/',
+            url:`${SERVER_ROUTE}/obtener/horario/`,
             type: 'POST',
             data: {id:id},
             success: function(data){
@@ -473,7 +474,7 @@ $(document).ready(function(){
       function loadTable(search){
 
         $.ajax({
-          url: 'http://comedor.undac.edu.pe/horario/dato/todo/', 
+          url: `${SERVER_ROUTE}/horario/dato/todo/`, 
           data: {search: search},
           type: 'POST', 
           beforeSend: function(){
@@ -529,7 +530,7 @@ $(document).ready(function(){
             obj=$("#"+target);
 
           $.ajax({
-            url:'http://comedor.undac.edu.pe/obtener/horario/',
+            url: `${SERVER_ROUTE}/obtener/horario/`,
             type: 'POST',
             data:{id:id},
             beforeSend: function(data){

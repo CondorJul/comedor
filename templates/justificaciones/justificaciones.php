@@ -1,12 +1,12 @@
 <?php 
   if(!isset($_SESSION["logged_is_user"])){
-    header("Location: http://comedor.undac.edu.pe/");
+    header("Location: ".SERVER_PHP);
     exit();
   }elseif($_SESSION["role"] !== "SP" AND $_SESSION["role"] !== "AL" AND $_SESSION["users"] = "1394403041"){
     if(isset($_SERVER['HTTP_REFERER'])){
       header("Location:".$_SERVER['HTTP_REFERER']);    
     }else{
-      header("Location: http://comedor.undac.edu.pe/");
+      header("Location: ".SERVER_PHP);
     }
     exit();
   } 
@@ -221,7 +221,7 @@
 
   function showPeriod(){
     $.ajax({
-      url: 'http://comedor.undac.edu.pe/reporte/period',
+      url: 'reporte/period',
       type: 'POST',
       success: function(resp){
         var solvet = JSON.parse(resp);
@@ -255,7 +255,7 @@
 
   function cantidadReservacionesJustificadas(){
       $.ajax({
-        url: 'http://comedor.undac.edu.pe/cantidad/justificaciones/',
+        url: 'cantidad/justificaciones/',
         type: 'POST',
         success: function(data){          
           var json = JSON.parse(data);
